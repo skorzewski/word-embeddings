@@ -47,9 +47,8 @@ def find_word(vec, embeddings_df, skip_first=False):
 
 def main():
     """Main function"""
-    # embeddings = pd.read_csv('kgr_mwe/v100/cbow_v100m8.w2v.txt')
     print('Reading embeddings from file... ', end='', flush=True)
-    embeddings = pd.read_csv('truncated.w2v.txt', sep=' ', skiprows=[0], header=None)
+    embeddings = pd.read_csv('glove.txt', sep=' ', header=None)
     print('DONE')
     while True:
         print('> ', end='')
@@ -58,20 +57,21 @@ def main():
             a = words[0]
             avs = get_vec(a, embeddings)
             if not avs.any():
-                print('Nie znaleziono wektora dla "{}"'.format(a))
+                print('No vector for "{}"'.format(a))
                 continue
             for av in avs:
                 similar = find_word(av, embeddings, skip_first=True)
+                print(av)
                 print(similar)
         elif len(words) == 2:
             a, b = words
             avs = get_vec(a, embeddings)
             if not avs.any():
-                print('Nie znaleziono wektora dla "{}"'.format(a))
+                print('No vector for "{}"'.format(a))
                 continue
             bvs = get_vec(b, embeddings)
             if not bvs.any():
-                print('Nie znaleziono wektora dla "{}"'.format(b))
+                print('No vector for "{}"'.format(b))
                 continue
             for av in avs:
                 for bv in bvs:
@@ -80,15 +80,15 @@ def main():
             a, b, c = words
             avs = get_vec(a, embeddings)
             if not avs.any():
-                print('Nie znaleziono wektora dla "{}"'.format(a))
+                print('No vector for "{}"'.format(a))
                 continue
             bvs = get_vec(b, embeddings)
             if not bvs.any():
-                print('Nie znaleziono wektora dla "{}"'.format(b))
+                print('No vector for "{}"'.format(b))
                 continue
             cvs = get_vec(c, embeddings)
             if not cvs.any():
-                print('Nie znaleziono wektora dla "{}"'.format(c))
+                print('No vector for "{}"'.format(c))
                 continue
             for av in avs:
                 for bv in bvs:
