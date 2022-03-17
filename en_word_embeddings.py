@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 
 import math
+import sys
+
 import numpy as np
 import pandas as pd
-# from scipy.spatial.distance import cosine
 
 
 def get_vec(word, embeddings_df):
@@ -13,7 +14,7 @@ def get_vec(word, embeddings_df):
 
 
 def vector_len(v):
-    return math.sqrt(sum([x*x for x in v]))
+    return math.sqrt(sum([x * x for x in v]))
 
 
 def dot_product(v1, v2):
@@ -45,13 +46,13 @@ def find_word(vec, embeddings_df, skip_first=False):
     return words_sorted[:5]
 
 
-def main():
+def main(filename):
     """Main function"""
-    print('Reading embeddings from file... ', end='', flush=True)
-    embeddings = pd.read_csv('glove.txt', sep=' ', header=None)
-    print('DONE')
+    print("Reading embeddings from file... ", end="", flush=True)
+    embeddings = pd.read_csv(filename, sep=" ", header=None)
+    print("DONE")
     while True:
-        print('> ', end='')
+        print("> ", end="")
         words = input().split()
         if len(words) == 1:
             a = words[0]
@@ -98,5 +99,5 @@ def main():
                         print(d)
 
 
-if __name__ == '__main__':
-    main()
+if __name__ == "__main__":
+    main(sys.argv[1])
